@@ -19,16 +19,15 @@ namespace TP214E
     /// </summary>
     public partial class PageAccueil : Page
     {
-        private DAL dal;
+        
         public PageAccueil()
         {
             InitializeComponent();
-            dal = new DAL();
         }
 
         private void BoutonInventaire_Click(object sender, RoutedEventArgs e)
         {
-            PageInventaire frmInventaire = new PageInventaire(dal);
+            PageInventaire frmInventaire = new PageInventaire();
 
             this.NavigationService.Navigate(frmInventaire);
 
