@@ -6,10 +6,10 @@ using System.Text;
 
 namespace TP214E.Data.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class DALTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void Test()
         {
             Assert.Fail();

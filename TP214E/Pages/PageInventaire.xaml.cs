@@ -17,10 +17,6 @@ using TP214E.Data;
 
 namespace TP214E
 {
-   
-    
-    
-
     /// <summary>
     /// Logique d'interaction pour Inventaire.xaml
     /// </summary>
@@ -81,7 +77,6 @@ namespace TP214E
             btnDeSelectionnerAlimentDatagrid.IsEnabled = true;
 
             BtnAjouterModifier.Content = nameof(EtatButton.Modifier);
-
             BtnEffacerSupprimer.Content = nameof(EtatButton.Supprimer);
 
             RemplissageFormulaireSurAliment();
@@ -104,10 +99,11 @@ namespace TP214E
         private void DeselectionnerAlimentDansDataGrid()
         {
             DgInventaire.UnselectAll();
-            EffacerChampsCreationEtModificationAliment();
             BtnAjouterModifier.Content = nameof(EtatButton.Ajouter);
             BtnEffacerSupprimer.Content = nameof(EtatButton.Effacer);
             btnDeSelectionnerAlimentDatagrid.IsEnabled = false;
+
+            EffacerChampsCreationEtModificationAliment();
         }
 
         private void ClickButtonEffacerOuSupprimerAliment(object sender, RoutedEventArgs e)
