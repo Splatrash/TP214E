@@ -48,9 +48,21 @@
             </Button>
         </DockPanel>
 
-        <DataGrid Name="DgInventaire" Grid.Column="2" Grid.Row="1" Grid.RowSpan="5" Margin="10">
+        <DataGrid Name="DgInventaire" Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Margin="10">
 
         </DataGrid>
+
+        <DockPanel Grid.Column="2" Grid.Row="5">
+            <Button HorizontalAlignment="Center" Content="Déselectionner l'item" Background="#CC5F8C5A" BorderBrush="White" Foreground="White" BorderThickness="2,2,2,2" Padding="10,5" FontSize="24" Width="400" Click="BoutonInventaire_Click" FontWeight="Bold" FontFamily="Rockwell" Margin="20,0,10,0" Height="57">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+        </DockPanel>
+        
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
