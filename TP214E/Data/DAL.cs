@@ -16,7 +16,7 @@ namespace TP214E.Data
             mongoDBClient = OuvrirConnexion();
         }
 
-        public List<Aliment> ALiments()
+        public List<Aliment> ChercherAlimentBaseDonnees()
         {
             var aliments = new List<Aliment>();
             try
