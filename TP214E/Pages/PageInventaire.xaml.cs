@@ -98,12 +98,16 @@ namespace TP214E
 
         private void ClickButtonDeSelectionnerAliment(object sender, RoutedEventArgs e)
         {
+           DeselectionnerAlimentDansDataGrid();
+        }
+
+        private void DeselectionnerAlimentDansDataGrid()
+        {
             DgInventaire.UnselectAll();
             EffacerChampsCreationEtModificationAliment();
             BtnAjouterModifier.Content = nameof(EtatButton.Ajouter);
             BtnEffacerSupprimer.Content = nameof(EtatButton.Effacer);
             btnDeSelectionnerAlimentDatagrid.IsEnabled = false;
-
         }
 
         private void ClickButtonEffacerOuSupprimerAliment(object sender, RoutedEventArgs e)
@@ -116,6 +120,7 @@ namespace TP214E
                 case nameof(EtatButton.Supprimer):
                     dal.SupprimerAlimentDansBaseDonnees(alimentSelectionne.Id);
                     AjouterListeAlimentsDansDataGrid();
+
                     break;
             }
         }
@@ -149,13 +154,33 @@ namespace TP214E
             switch (BtnAjouterModifier.Content)
             {
                 case nameof(EtatButton.Ajouter):
-                    
-                    break;
-                case nameof(EtatButton.Modifier):
-                    dal.SupprimerAlimentDansBaseDonnees(alimentSelectionne.Id);
+                    dal.AjouterAlimentDansBaseDonnees(CreerAlimentSansId());
                     AjouterListeAlimentsDansDataGrid();
                     break;
+                case nameof(EtatButton.Modifier):
+                    dal.ModifierAlimentDansBaseDonnees(CreerAlimentApresModification());
+                    AjouterListeAlimentsDansDataGrid();
+                    DeselectionnerAlimentDansDataGrid();
+                    break;
             }
+        }
+
+        private Aliment CreerAlimentApresModification()
+        {
+            Aliment alimentApresModification = CreerAlimentSansId();
+            alimentApresModification.Id = alimentSelectionne.Id;
+            return alimentApresModification;
+        }
+
+        private Aliment CreerAlimentSansId()
+        {
+            Aliment alimentCreer = new Aliment();
+            alimentCreer.Nom = TxtNom.Text.Trim();
+            alimentCreer.Quantite = Int32.Parse(TxtQuantite.Text.Trim());
+            alimentCreer.Unite = TxtUnite.Text.Trim();
+            alimentCreer.ExpireLe = DpDateExpiration.SelectedDate.Value;
+
+            return alimentCreer;
         }
     }
 }

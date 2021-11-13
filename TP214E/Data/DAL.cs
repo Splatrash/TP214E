@@ -31,6 +31,36 @@ namespace TP214E.Data
             return aliments;
         }
 
+        public void AjouterAlimentDansBaseDonnees(Aliment alimentAjoute)
+        {
+            try
+            {
+                IMongoDatabase baseDonnees = mongoDBClient.GetDatabase("TP2DB");
+                baseDonnees.GetCollection<Aliment>("Aliments").InsertOne(alimentAjoute);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        public void ModifierAlimentDansBaseDonnees(Aliment aliment)
+        {
+            try
+            {
+                IMongoDatabase baseDonnees = mongoDBClient.GetDatabase("TP2DB");
+                var conditions = Builders<Aliment>.Filter.Eq("_id", aliment.Id);
+                var modificationEffectuee = Builders<Aliment>.Update.Set("Nom", aliment.Nom)
+                    .Set("Quantite", aliment.Quantite).Set("Unite", aliment.Unite).Set("ExpireLe", aliment.ExpireLe);
+                var requeteSupression = baseDonnees.GetCollection<Aliment>("Aliments").UpdateOne(conditions, modificationEffectuee);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         public void SupprimerAlimentDansBaseDonnees(ObjectId idAliment)
         {
             try
