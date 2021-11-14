@@ -75,7 +75,9 @@ namespace TP214E.Pages
 
         private void ClickAlimentDansListeAliments(object sender, EventArgs e)
         {
-            
+            Aliment alimentClicke = (Aliment)((Button)sender).Tag;
+
+            DgCommande.Items.Add(alimentClicke);
         }
 
         private void ClickBoutonRetourVersAccueil(object sender, RoutedEventArgs e)
