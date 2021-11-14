@@ -72,12 +72,14 @@
             </Button>
         </DockPanel>
 
-        <WrapPanel Name="WrpPanelAliments" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="12">
-            
-            
-        </WrapPanel>
+        <ScrollViewer Grid.Column="1" Grid.Row="2"  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Margin="5">
+            <WrapPanel Name="WrpPanelAliments" Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+            </WrapPanel>
+        </ScrollViewer>
 
-        <Border  Grid.Row="2" Grid.Column="1" BorderThickness="5" BorderBrush="#CC5F8C5A" Margin="10"></Border>
+        
+
+        <Border  Grid.Row="2" Grid.Column="1" BorderThickness="5" BorderBrush="#CC5F8C5A"></Border>
 
         <DataGrid Width="Auto" Name="DgCommande" Grid.Column="2" Grid.Row="2" Margin="10" IsReadOnly="True">
             <DataGrid.Columns>

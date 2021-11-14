@@ -20,6 +20,8 @@ namespace TP214E.Pages
     /// </summary>
     public partial class PageCommandes : Page
     {
+       //CHECKER POUR A JOUR INVENTAIRE AUTOMATIQUEMENT
+
         private readonly DAL dal;
         public PageCommandes()
         {
