@@ -152,7 +152,7 @@ namespace TP214E
             switch (BtnAjouterModifier.Content)
             {
                 case nameof(EtatButton.Ajouter):
-                    if (ValidationAjoutAliment())
+                    if (ValidationAliment())
                     {
                         dal.AjouterAlimentDansBaseDonnees(CreerAlimentSansId());
                         AjouterListeAlimentsDansDataGrid();
@@ -160,7 +160,7 @@ namespace TP214E
                     }
                     break;
                 case nameof(EtatButton.Modifier):
-                    if (ValidationAjoutAliment())
+                    if (ValidationAliment())
                     {
                         dal.ModifierAlimentDansBaseDonnees(CreerAlimentApresModification());
                         AjouterListeAlimentsDansDataGrid();
@@ -171,7 +171,7 @@ namespace TP214E
             
         }
 
-        private bool ValidationAjoutAliment()
+        private bool ValidationAliment()
         {
             string contenuMessageBoxErreur = "";
             if (!ValidationsEntrees.ValiderAlphaNumeriqueAvecEspaceNonVide(TxtNom.Text))
