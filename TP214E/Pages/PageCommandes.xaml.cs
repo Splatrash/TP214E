@@ -45,30 +45,19 @@ namespace TP214E.Pages
             List<Aliment> alimentsDansInventaire = dal.ChercherAlimentBaseDonnees();
 
             foreach (Aliment aliment in alimentsDansInventaire)
-                WrpPanelAliments.Children.Add(CreationButtonsListeAliments(aliment));
-        }
-
-        private Button CreationButtonsListeAliments(Aliment aliment)
-        {
-            
-            var hexColor = new BrushConverter();
-
-            Button btnAliment = new Button();
-
-            btnAliment.Content = aliment.Nom;
-            btnAliment.Tag = aliment;
-            btnAliment.Background = (Brush)hexColor.ConvertFrom("#03179c");
-            btnAliment.Foreground = Brushes.White;
-            btnAliment.BorderBrush = Brushes.White;
-            btnAliment.BorderThickness = new Thickness(2, 2, 2, 2);
-            btnAliment.Margin = new Thickness(6, 6, 6, 6);
-            btnAliment.Padding = new Thickness(10, 10, 10, 10);
-            btnAliment.FontSize = 16;
-            btnAliment.FontWeight = FontWeights.Bold;
-            btnAliment.FontFamily = new FontFamily("Rockwell");
-            btnAliment.Click += new System.Windows.RoutedEventHandler(ClickAlimentDansListeAliments);
-
-            return btnAliment;
+            {
+                try
+                {
+                    Button btnAliment = CreationControlButton.TypeDeButtonACreer(aliment);
+                    btnAliment.Click += new System.Windows.RoutedEventHandler(ClickAlimentDansListeAliments);
+                    WrpPanelAliments.Children.Add(btnAliment);
+                }
+                catch (ArgumentNullException exception)
+                {
+                    MessageBox.Show("Une erreur s'est produite : " + exception.Message, "Ajout d'un boutton");
+                    throw;
+                }
+            }
         }
 
         private void ClickAlimentDansListeAliments(object sender, EventArgs e)
