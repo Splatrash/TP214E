@@ -31,17 +31,21 @@ namespace TP214E.Pages
 
             CreerListeAliments();
 
-
+            SetEtatInitialControlsPage();
         }
 
-      
+        private void SetEtatInitialControlsPage()
+        {
+            if (Commandes.ListeCommandes.Count != 0)
+                BtnHistoriqueCommande.IsEnabled = true;
+        }
+
         private void CreerListeAliments()
         {
             List<Aliment> alimentsDansInventaire = dal.ChercherAlimentBaseDonnees();
 
             foreach (Aliment aliment in alimentsDansInventaire)
                 WrpPanelAliments.Children.Add(CreationButtonsListeAliments(aliment));
-            
         }
 
         private Button CreationButtonsListeAliments(Aliment aliment)
@@ -114,6 +118,9 @@ namespace TP214E.Pages
             Commande commandeCreer = new Commande(ObtenirNumeroCommande(), objetsCommande, DateTime.Today);
 
             Commandes.ListeCommandes.Add(commandeCreer);
+
+            BtnHistoriqueCommande.IsEnabled = true;
+
             EffacerCommande();
         }
 

@@ -9,7 +9,7 @@
      
       Title="Inventaire">
 
-    <Grid ShowGridLines="True" Background="Black">
+    <Grid ShowGridLines="False" Background="Black">
         <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Gestion de l'inventaire" Foreground="#FF5F8C5A" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Rockwell" FontSize="40" FontWeight="Normal"/>
 
         <DockPanel Grid.Column="1" Grid.Row="0">

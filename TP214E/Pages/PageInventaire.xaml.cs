@@ -42,7 +42,7 @@ namespace TP214E
         {
             BtnAjouterModifier.Content = EtatButton.Ajouter.ToString();
             BtnEffacerSupprimer.Content = EtatButton.Effacer.ToString();
-
+            
             DpDateExpiration.SelectedDate = DateTime.Today;
         }
 
