@@ -114,8 +114,8 @@ namespace TP214E.Pages
 
             foreach (ObjetCommande objetCommande in DgCommande.Items)
                 objetsCommande.Add(objetCommande);
-
-            Commande commandeCreer = new Commande(ObtenirNumeroCommande(), objetsCommande, DateTime.Today);
+            
+            Commande commandeCreer = new Commande( objetsCommande, DateTime.Today);
 
             Commandes.ListeCommandes.Add(commandeCreer);
 
@@ -124,18 +124,7 @@ namespace TP214E.Pages
             EffacerCommande();
         }
 
-        private int ObtenirNumeroCommande()
-        {
-            int numeroCommande;
-
-            //Rappel personnel: Le ? permet de faire le if lorsque on est pas garantie qu'il ne soit pas null
-            if (Commandes.ListeCommandes.Any())
-                numeroCommande = Commandes.ListeCommandes[Commandes.ListeCommandes.Count - 1].NumeroCommande + 1;
-            else
-                numeroCommande = 1;
-
-            return numeroCommande;
-        }
+    
 
         private void ClickButtonEffacerCommande(object sender, RoutedEventArgs e)
         {

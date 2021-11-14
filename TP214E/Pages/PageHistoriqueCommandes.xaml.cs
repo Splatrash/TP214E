@@ -67,7 +67,6 @@ namespace TP214E.Pages
             {
                 DgCommande.Items.Add(objetCommande);
             }
-            
         }
 
         private void ClickBoutonRetourVersGestionCommandes(object sender, RoutedEventArgs e)
