@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace TP214E.Data
@@ -12,11 +13,24 @@ namespace TP214E.Data
         public List<ObjetCommande> ObjetsCommande { get; set; }
         public DateTime CreerLe { get; set; }
 
-        public Commande(int numeroCommande, List<ObjetCommande> objetsCommande, DateTime creerLe)
+        public Commande(List<ObjetCommande> objetsCommande, DateTime creerLe)
         {
-            NumeroCommande = numeroCommande;
+            NumeroCommande = ObtenirNumeroCommande();
             ObjetsCommande = objetsCommande;
             CreerLe = creerLe;
+        }
+
+        public int ObtenirNumeroCommande()
+        {
+            int numeroCommande;
+
+            //Rappel personnel: Le ? permet de faire le if lorsque on est pas garantie qu'il ne soit pas null
+            if (Commandes.ListeCommandes.Any())
+                numeroCommande = Commandes.ListeCommandes[Commandes.ListeCommandes.Count - 1].NumeroCommande + 1;
+            else
+                numeroCommande = 1;
+
+            return numeroCommande;
         }
     }
 }
