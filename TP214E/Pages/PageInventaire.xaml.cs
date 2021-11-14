@@ -181,7 +181,7 @@ namespace TP214E
 
         private void ClickBoutonRetourVersAccueil(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageAccueil());
+            NavigationService.Navigate(new PageAccueil());
         }
     }
 }

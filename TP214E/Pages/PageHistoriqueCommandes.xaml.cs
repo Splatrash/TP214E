@@ -30,31 +30,19 @@ namespace TP214E.Pages
             List<Commande> commandes = Commandes.ListeCommandes;
 
             foreach (Commande commande in commandes)
-                WrpPanelCommandes.Children.Add(CreationButtonsListeCommandes(commande));
-
-        }
-        private Button CreationButtonsListeCommandes(Commande commande)
-        {
-
-            var hexColor = new BrushConverter();
-
-            Button btnCommande = new Button();
-
-            btnCommande.Tag = commande;
-            btnCommande.Content = String.Format("Commande {0}\r\n# items: {1}",commande.NumeroCommande, commande.ObjetsCommande.Count);
-            btnCommande.Background = (Brush)hexColor.ConvertFrom("#c95502");
-            btnCommande.Foreground = Brushes.White;
-            btnCommande.BorderBrush = Brushes.White;
-            btnCommande.BorderThickness = new Thickness(2, 2, 2, 2);
-            btnCommande.Margin = new Thickness(6, 6, 6, 6);
-            btnCommande.Padding = new Thickness(10, 10, 10, 10);
-            btnCommande.FontSize = 16;
-            btnCommande.FontWeight = FontWeights.Bold;
-            btnCommande.FontFamily = new FontFamily("Rockwell");
-            btnCommande.Width = 152;
-            btnCommande.Click += new System.Windows.RoutedEventHandler(ClickCommandeDansListeCommandes);
-
-            return btnCommande;
+            {
+                try
+                {
+                    Button btnCommande = CreationControlButton.TypeDeButtonACreer(commande);
+                    btnCommande.Click += new System.Windows.RoutedEventHandler(ClickCommandeDansListeCommandes);
+                    WrpPanelCommandes.Children.Add(btnCommande);
+                }
+                catch (ArgumentNullException exception)
+                {
+                    MessageBox.Show("Une erreur s'est produite : " + exception.Message, "Ajout d'un boutton");
+                    throw;
+                }
+            }
         }
 
         private void ClickCommandeDansListeCommandes(object sender, RoutedEventArgs e)
@@ -71,7 +59,7 @@ namespace TP214E.Pages
 
         private void ClickBoutonRetourVersGestionCommandes(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageCommandes());
+            NavigationService.Navigate(new PageCommandes());
         }
     }
 }
