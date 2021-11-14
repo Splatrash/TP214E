@@ -28,7 +28,10 @@ namespace TP214E.Pages
 
             SetEtatInitialControlsPage();
 
-            
+            CreerListeAliments();
+
+
+
         }
 
         private void SetEtatInitialControlsPage()
@@ -36,6 +39,43 @@ namespace TP214E.Pages
             BtnHistoriqueCommande.IsEnabled = false;
             BtnCreerCommande.IsEnabled = false;
             BtnEffacerCommande.IsEnabled = false;
+        }
+
+        private void CreerListeAliments()
+        {
+            List<Aliment> alimentsDansInventaire = dal.ChercherAlimentBaseDonnees();
+
+            foreach (Aliment aliment in alimentsDansInventaire)
+                WrpPanelAliments.Children.Add(CreationButtonAliment(aliment));
+            
+        }
+
+        private Button CreationButtonAliment(Aliment aliment)
+        {
+            
+            var hexColor = new BrushConverter();
+
+            Button btnAliment = new Button();
+
+            btnAliment.Content = aliment.Nom;
+            btnAliment.Tag = aliment;
+            btnAliment.Background = (Brush)hexColor.ConvertFrom("#03179c");
+            btnAliment.Foreground = Brushes.White;
+            btnAliment.BorderBrush = Brushes.White;
+            btnAliment.BorderThickness = new Thickness(2, 2, 2, 2);
+            btnAliment.Margin = new Thickness(6, 6, 6, 6);
+            btnAliment.Padding = new Thickness(10, 10, 10, 10);
+            btnAliment.FontSize = 16;
+            btnAliment.FontWeight = FontWeights.Bold;
+            btnAliment.FontFamily = new FontFamily("Rockwell");
+            btnAliment.Click += new System.Windows.RoutedEventHandler(ClickAlimentDansListeAliments);
+
+            return btnAliment;
+        }
+
+        private void ClickAlimentDansListeAliments(object sender, EventArgs e)
+        {
+            
         }
 
         private void ClickBoutonRetourVersAccueil(object sender, RoutedEventArgs e)

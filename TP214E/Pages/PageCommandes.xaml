@@ -72,14 +72,14 @@
             </Button>
         </DockPanel>
 
-        <WrapPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+        <WrapPanel Name="WrpPanelAliments" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="12">
             
             
         </WrapPanel>
 
         <Border  Grid.Row="2" Grid.Column="1" BorderThickness="5" BorderBrush="#CC5F8C5A" Margin="10"></Border>
 
-        <DataGrid Width="Auto" Name="DgInventaire" Grid.Column="2" Grid.Row="2" Margin="10" IsReadOnly="True">
+        <DataGrid Width="Auto" Name="DgCommande" Grid.Column="2" Grid.Row="2" Margin="10" IsReadOnly="True">
 
         </DataGrid>
 
