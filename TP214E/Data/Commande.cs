@@ -8,8 +8,15 @@ namespace TP214E.Data
     {
         //Si dans le futur on a besoin de mettre dans une base de données
         //public ObjectId Id { get; set; }
-        public string NumeroCommande { get; set; }
-        public List<Tuple<string, int>> ObjetsCommande { get; set; }
+        public int NumeroCommande { get; set; }
+        public List<ObjetCommande> ObjetsCommande { get; set; }
         public DateTime CreerLe { get; set; }
+
+        public Commande(int numeroCommande, List<ObjetCommande> objetsCommande, DateTime creerLe)
+        {
+            NumeroCommande = numeroCommande;
+            ObjetsCommande = objetsCommande;
+            CreerLe = creerLe;
+        }
     }
 }

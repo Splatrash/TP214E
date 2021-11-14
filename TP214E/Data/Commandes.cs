@@ -5,8 +5,8 @@ using MongoDB.Bson;
 
 namespace TP214E.Data
 {
-    public class Commandes
+    public static class Commandes
     {
-        public List<Commande> ListeCommandes { get; set; }
+        public static List<Commande> ListeCommandes = new List<Commande>();
     }
 }

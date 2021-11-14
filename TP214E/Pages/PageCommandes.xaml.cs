@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +21,6 @@ namespace TP214E.Pages
     public partial class PageCommandes : Page
     {
         private readonly DAL dal;
-
         public PageCommandes()
         {
             dal = new DAL();
@@ -38,11 +38,11 @@ namespace TP214E.Pages
             List<Aliment> alimentsDansInventaire = dal.ChercherAlimentBaseDonnees();
 
             foreach (Aliment aliment in alimentsDansInventaire)
-                WrpPanelAliments.Children.Add(CreationButtonAliment(aliment));
+                WrpPanelAliments.Children.Add(CreationButtonsListeAliments(aliment));
             
         }
 
-        private Button CreationButtonAliment(Aliment aliment)
+        private Button CreationButtonsListeAliments(Aliment aliment)
         {
             
             var hexColor = new BrushConverter();
@@ -77,13 +77,11 @@ namespace TP214E.Pages
             {
                 if (objetCommande.NomAliment == alimentAjoute.Nom)
                 {
-                   
                     objetCommande.ChangerQuantite(1);
                     DgCommande.Items.Refresh();
                     return;
                 }
             }
-
 
             ObjetCommande objetAjouterCommande = new ObjetCommande(alimentAjoute.Nom, 1);
             DgCommande.Items.Add(objetAjouterCommande);
@@ -93,9 +91,8 @@ namespace TP214E.Pages
         {
             DgCommande.Items.Remove(DgCommande.SelectedItem);
             if (DgCommande.Items.Count == 0)
-            {
                 ChangerEtatBoutonCreerEtEffacer();
-            }
+            
             DgCommande.Items.Refresh();
         }
 
@@ -105,17 +102,38 @@ namespace TP214E.Pages
             BtnEffacerCommande.IsEnabled = !BtnEffacerCommande.IsEnabled;
         }
 
-        private void ClickBoutonRetourVersAccueil(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new PageAccueil());
-        }
-
         private void ClickBoutonCreerCommande(object sender, RoutedEventArgs e)
         {
+            List<ObjetCommande> objetsCommande = new List<ObjetCommande>();
 
+            foreach (ObjetCommande objetCommande in DgCommande.Items)
+                objetsCommande.Add(objetCommande);
+            
+            Commande commandeCreer = new Commande(ObtenirNumeroCommande(), objetsCommande, DateTime.Today);
+
+            Commandes.ListeCommandes.Add(commandeCreer);
+            EffacerCommande();
+        }
+
+        private int ObtenirNumeroCommande()
+        {
+            int numeroCommande;
+
+            //Rappel personnel: Le ? permet de faire le if lorsque on est pas garantie qu'il ne soit pas null
+            if (Commandes.ListeCommandes.Any())
+                numeroCommande = Commandes.ListeCommandes[Commandes.ListeCommandes.Count - 1].NumeroCommande + 1;
+            else
+                numeroCommande = 1;
+
+            return numeroCommande;
         }
 
         private void ClickButtonEffacerCommande(object sender, RoutedEventArgs e)
+        {
+            EffacerCommande();
+        }
+
+        private void EffacerCommande()
         {
             DgCommande.Items.Clear();
             ChangerEtatBoutonCreerEtEffacer();
@@ -124,12 +142,18 @@ namespace TP214E.Pages
 
         private void ClickBoutonConsulterHistoriqueInventaire(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new PageHistoriqueCommandes());
         }
 
         private void ClickButtonConsulterInventaire(object sender, RoutedEventArgs e)
         {
-
+            this.NavigationService.Navigate(new PageInventaire());
         }
+        private void ClickBoutonRetourVersAccueil(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PageAccueil());
+        }
+
     }
+    
 }
