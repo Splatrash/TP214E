@@ -20,7 +20,7 @@ namespace TP214E.Pages
     /// </summary>
     public partial class PageCommandes : Page
     {
-       //CHECKER POUR A JOUR INVENTAIRE AUTOMATIQUEMENT
+        //CHECKER POUR A JOUR INVENTAIRE AUTOMATIQUEMENT
 
         private readonly DAL dal;
         public PageCommandes()
@@ -50,7 +50,7 @@ namespace TP214E.Pages
 
         private Button CreationButtonsListeAliments(Aliment aliment)
         {
-            
+
             var hexColor = new BrushConverter();
 
             Button btnAliment = new Button();
@@ -98,7 +98,7 @@ namespace TP214E.Pages
             DgCommande.Items.Remove(DgCommande.SelectedItem);
             if (DgCommande.Items.Count == 0)
                 ChangerEtatBoutonCreerEtEffacer();
-            
+
             DgCommande.Items.Refresh();
         }
 
@@ -114,7 +114,7 @@ namespace TP214E.Pages
 
             foreach (ObjetCommande objetCommande in DgCommande.Items)
                 objetsCommande.Add(objetCommande);
-            
+
             Commande commandeCreer = new Commande(ObtenirNumeroCommande(), objetsCommande, DateTime.Today);
 
             Commandes.ListeCommandes.Add(commandeCreer);
@@ -164,5 +164,5 @@ namespace TP214E.Pages
         }
 
     }
-    
+
 }

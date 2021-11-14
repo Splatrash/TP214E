@@ -5,7 +5,16 @@ using System.Text;
 
 namespace TP214E.Data
 {
-    public class Aliment
+    public interface IAliment
+    {
+        ObjectId Id { get; set; }
+        string Nom { get; set; }
+        int Quantite { get; set; }
+        string Unite { get; set; }
+        DateTime ExpireLe { get; set; }
+    }
+
+    public class Aliment : IAliment
     {
         public ObjectId Id { get; set; }
         public string Nom { get; set; }
