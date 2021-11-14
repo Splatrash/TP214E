@@ -24,6 +24,7 @@ namespace TP214E
 
         public PageAccueil()
         {
+
             InitializeComponent();
         }
 

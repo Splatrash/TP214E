@@ -118,7 +118,7 @@ namespace TP214E
                 case nameof(EtatButton.Supprimer):
                     dal.SupprimerAlimentDansBaseDonnees(alimentSelectionne.Id);
                     AjouterListeAlimentsDansDataGrid();
-
+                    DeselectionnerAlimentDansDataGrid();
                     break;
             }
         }
@@ -152,15 +152,42 @@ namespace TP214E
             switch (BtnAjouterModifier.Content)
             {
                 case nameof(EtatButton.Ajouter):
-                    dal.AjouterAlimentDansBaseDonnees(CreerAlimentSansId());
-                    AjouterListeAlimentsDansDataGrid();
+                    if (ValidationAliment())
+                    {
+                        dal.AjouterAlimentDansBaseDonnees(CreerAlimentSansId());
+                        AjouterListeAlimentsDansDataGrid();
+                        DeselectionnerAlimentDansDataGrid();
+                    }
                     break;
                 case nameof(EtatButton.Modifier):
-                    dal.ModifierAlimentDansBaseDonnees(CreerAlimentApresModification());
-                    AjouterListeAlimentsDansDataGrid();
-                    DeselectionnerAlimentDansDataGrid();
+                    if (ValidationAliment())
+                    {
+                        dal.ModifierAlimentDansBaseDonnees(CreerAlimentApresModification());
+                        AjouterListeAlimentsDansDataGrid();
+                        DeselectionnerAlimentDansDataGrid();
+                    }
                     break;
             }
+            
+        }
+
+        private bool ValidationAliment()
+        {
+            string contenuMessageBoxErreur = "";
+            if (!ValidationsEntrees.ValiderAlphaNumeriqueAvecEspaceNonVide(TxtNom.Text))
+                contenuMessageBoxErreur += "- Le nom doit seulement contenir des caractères alphanumérique et ne pas être vide.\n";
+            if (!ValidationsEntrees.ValiderAlphaNumeriqueSansEspaceNonVide(TxtUnite.Text))
+                contenuMessageBoxErreur += "- L'unite doit seulement contenir des caractères alphanumérique, pas d'espaces et ne pas être vide.\n";
+            if (!ValidationsEntrees.ValiderNumeriqueSansEspaceNonVide(TxtQuantite.Text))
+                contenuMessageBoxErreur += "- La quantité doit seulement contenir des caractères numérique, d'espaces et ne pas être vide.\n";
+
+            if (contenuMessageBoxErreur != "")
+            {
+                MessageBox.Show("L'ajout n'a pas pu se faire, veillez suivre ces conseils: \n \n" + contenuMessageBoxErreur, "Vérifier les données", MessageBoxButton.OK);
+                return false;
+            }
+            else
+                return true;
         }
 
         private Aliment CreerAlimentApresModification()
