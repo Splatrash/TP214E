@@ -71,7 +71,7 @@ namespace TP214E.Pages
 
         private void ClickBoutonRetourVersGestionCommandes(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageCommandes());
+            NavigationService.Navigate(new PageCommandes());
         }
     }
 }

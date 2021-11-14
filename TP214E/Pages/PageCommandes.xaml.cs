@@ -140,16 +140,16 @@ namespace TP214E.Pages
 
         private void ClickBoutonConsulterHistoriqueInventaire(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageHistoriqueCommandes());
+            NavigationService.Navigate(new PageHistoriqueCommandes());
         }
 
         private void ClickButtonConsulterInventaire(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageInventaire());
+            NavigationService.Navigate(new PageInventaire());
         }
         private void ClickBoutonRetourVersAccueil(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new PageAccueil());
+            NavigationService.Navigate(new PageAccueil());
         }
 
     }
