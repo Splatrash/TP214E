@@ -42,7 +42,6 @@ namespace TP214E
         {
             BtnAjouterModifier.Content = EtatButton.Ajouter.ToString();
             BtnEffacerSupprimer.Content = EtatButton.Effacer.ToString();
-            btnDeSelectionnerAlimentDatagrid.IsEnabled = false;
 
             DpDateExpiration.SelectedDate = DateTime.Today;
         }
@@ -168,16 +167,14 @@ namespace TP214E
         {
             Aliment alimentApresModification = CreerAlimentSansId();
             alimentApresModification.Id = alimentSelectionne.Id;
+
             return alimentApresModification;
         }
 
         private Aliment CreerAlimentSansId()
         {
-            Aliment alimentCreer = new Aliment();
-            alimentCreer.Nom = TxtNom.Text.Trim();
-            alimentCreer.Quantite = Int32.Parse(TxtQuantite.Text.Trim());
-            alimentCreer.Unite = TxtUnite.Text.Trim();
-            alimentCreer.ExpireLe = DpDateExpiration.SelectedDate.Value;
+            
+            Aliment alimentCreer = new Aliment(TxtNom.Text.Trim(), Int32.Parse(TxtQuantite.Text.Trim()), TxtUnite.Text.Trim(), DpDateExpiration.SelectedDate.Value);
 
             return alimentCreer;
         }

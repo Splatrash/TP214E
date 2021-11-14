@@ -20,27 +20,19 @@ namespace TP214E.Pages
     public partial class PageCommandes : Page
     {
         private readonly DAL dal;
+
         public PageCommandes()
         {
             dal = new DAL();
 
             InitializeComponent();
 
-            SetEtatInitialControlsPage();
-
             CreerListeAliments();
 
 
-
         }
 
-        private void SetEtatInitialControlsPage()
-        {
-            BtnHistoriqueCommande.IsEnabled = false;
-            BtnCreerCommande.IsEnabled = false;
-            BtnEffacerCommande.IsEnabled = false;
-        }
-
+      
         private void CreerListeAliments()
         {
             List<Aliment> alimentsDansInventaire = dal.ChercherAlimentBaseDonnees();
@@ -75,9 +67,42 @@ namespace TP214E.Pages
 
         private void ClickAlimentDansListeAliments(object sender, EventArgs e)
         {
-            Aliment alimentClicke = (Aliment)((Button)sender).Tag;
 
-            DgCommande.Items.Add(alimentClicke);
+            Aliment alimentAjoute = (Aliment)(sender as Button).Tag;
+
+            if (DgCommande.Items.Count == 0)
+                ChangerEtatBoutonCreerEtEffacer();
+
+            foreach (ObjetCommande objetCommande in DgCommande.Items)
+            {
+                if (objetCommande.NomAliment == alimentAjoute.Nom)
+                {
+                   
+                    objetCommande.ChangerQuantite(1);
+                    DgCommande.Items.Refresh();
+                    return;
+                }
+            }
+
+
+            ObjetCommande objetAjouterCommande = new ObjetCommande(alimentAjoute.Nom, 1);
+            DgCommande.Items.Add(objetAjouterCommande);
+        }
+
+        private void EvenementLigneDataGridSelectionneeDoubleClickee(object sender, MouseButtonEventArgs e)
+        {
+            DgCommande.Items.Remove(DgCommande.SelectedItem);
+            if (DgCommande.Items.Count == 0)
+            {
+                ChangerEtatBoutonCreerEtEffacer();
+            }
+            DgCommande.Items.Refresh();
+        }
+
+        private void ChangerEtatBoutonCreerEtEffacer()
+        {
+            BtnCreerCommande.IsEnabled = !BtnCreerCommande.IsEnabled;
+            BtnEffacerCommande.IsEnabled = !BtnEffacerCommande.IsEnabled;
         }
 
         private void ClickBoutonRetourVersAccueil(object sender, RoutedEventArgs e)
@@ -92,7 +117,9 @@ namespace TP214E.Pages
 
         private void ClickButtonEffacerCommande(object sender, RoutedEventArgs e)
         {
-
+            DgCommande.Items.Clear();
+            ChangerEtatBoutonCreerEtEffacer();
+            DgCommande.Items.Refresh();
         }
 
         private void ClickBoutonConsulterHistoriqueInventaire(object sender, RoutedEventArgs e)

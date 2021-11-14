@@ -13,5 +13,14 @@ namespace TP214E.Data
         public string Unite { get; set; }
         public DateTime ExpireLe { get; set; }
 
+        public Aliment(string nom, int quantite, string unite, DateTime expireLe)
+        {
+           
+            Nom = nom;
+            Quantite = quantite;
+            Unite = unite;
+            ExpireLe = expireLe;
+        }
+
     }
 }

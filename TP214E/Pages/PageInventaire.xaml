@@ -85,7 +85,7 @@
         </DataGrid>
 
                 <DockPanel Grid.Column="2" Grid.Row="6">
-            <Button Name="btnDeSelectionnerAlimentDatagrid" HorizontalAlignment="Center" Content="Déselectionner l'aliment" Background="#CC5F8C5A" BorderBrush="White" Foreground="White" BorderThickness="2,2,2,2" Padding="10,5" FontSize="20" Width="320"  FontWeight="Bold" FontFamily="Rockwell" Margin="20,0,10,0" Height="40" Click="ClickButtonDeSelectionnerAliment">
+            <Button Name="btnDeSelectionnerAlimentDatagrid" HorizontalAlignment="Center" Content="Déselectionner l'aliment" Background="#CC5F8C5A" BorderBrush="White" Foreground="White" BorderThickness="2,2,2,2" Padding="10,5" FontSize="20" Width="320"  FontWeight="Bold" FontFamily="Rockwell" Margin="20,0,10,0" Height="40" Click="ClickButtonDeSelectionnerAliment" IsEnabled="False">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
