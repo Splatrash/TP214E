@@ -5,29 +5,40 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TP214E"
       mc:Ignorable="d" 
-      d:DesignHeight="800" d:DesignWidth="1300"
+      d:DesignHeight="450" d:DesignWidth="800"
      
       Title="Inventaire">
 
     <Grid ShowGridLines="True" Background="Black">
-        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Gestion de l'inventaire" Foreground="#FF5F8C5A" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Rockwell" FontSize="50" FontWeight="Normal"/>
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Gestion de l'inventaire" Foreground="#FF5F8C5A" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Rockwell" FontSize="40" FontWeight="Normal"/>
 
-        <DockPanel Grid.Column="1" Grid.Row="1">
+        <DockPanel Grid.Column="1" Grid.Row="0">
+            <Button Name="BtnRetourVersAccueil" VerticalAlignment="Top" HorizontalAlignment="Left" Content="&lt; Retour" Background="#CC5F8C5A" BorderBrush="White" Foreground="White" BorderThickness="2,2,2,2" Padding="10,5" FontSize="20" Width="130"  FontWeight="Bold" FontFamily="Rockwell" Margin="20,10,10,0" Height="40" Click="ClickBoutonRetourVersAccueil">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+        </DockPanel>
+
+        <DockPanel Grid.Column="1" Grid.Row="2">
             <Label Margin="5,0,0,0" Content="Nom :" Foreground="#FF5F8C5A" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Rockwell" FontSize="20" FontWeight="Normal"/>
             <TextBox Name="TxtNom" PreviewTextInput="ValidationDesCharactereEcrits" Height="30" Margin="10" VerticalContentAlignment="Center"></TextBox>
         </DockPanel>
 
-        <DockPanel Grid.Column="1" Grid.Row="2">
+        <DockPanel Grid.Column="1" Grid.Row="3">
             <Label Margin="5,0,0,0" Content="Unité :" Foreground="#FF5F8C5A" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Rockwell" FontSize="20" FontWeight="Normal"/>
             <TextBox Name="TxtUnite" PreviewTextInput="ValidationDesCharactereEcrits" Height="30" Margin="10" VerticalContentAlignment="Center"></TextBox>
         </DockPanel>
 
-        <DockPanel Grid.Column="1" Grid.Row="3">
+        <DockPanel Grid.Column="1" Grid.Row="4">
             <Label Margin="5,0,0,0" Content="Quantité :" Foreground="#FF5F8C5A" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Rockwell" FontSize="20" FontWeight="Normal"/>
             <TextBox Name="TxtQuantite" PreviewTextInput="ValidationDesCharactereEcrits" Height="30" Margin="10" VerticalContentAlignment="Center"></TextBox>
         </DockPanel>
 
-        <DockPanel Grid.Column="1" Grid.Row="4">
+        <DockPanel Grid.Column="1" Grid.Row="5">
             <Label Margin="5,0,0,0" Content="Date d'expiration :" Foreground="#FF5F8C5A" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Rockwell" FontSize="20" FontWeight="Normal"/>
             <DatePicker Name="DpDateExpiration" Margin="10">
                 <DatePicker.Resources>
@@ -38,7 +49,7 @@
             </DatePicker>
         </DockPanel>
 
-        <DockPanel Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center">
+        <DockPanel Grid.Column="1" Grid.Row="6" HorizontalAlignment="Center">
             <Button Name="BtnAjouterModifier" HorizontalAlignment="Center" Content="[Ajout/Modifier]" Background="#CC5F8C5A" BorderBrush="White" Foreground="White" BorderThickness="2,2,2,2" Padding="10,5" FontSize="20" Width="130"  FontWeight="Bold" FontFamily="Rockwell" Margin="20,0,10,0" Height="40" Click="ClickBoutonAjoutOuModifierAliment">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -63,7 +74,7 @@
             </Button>
         </DockPanel>
 
-        <DataGrid Width="Auto" Name="DgInventaire" Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Margin="10" AutoGeneratingColumn="EvenementCreationAutomatiqueColonneDansDataGridInventaire" IsReadOnly="True">
+        <DataGrid Width="Auto" Name="DgInventaire" Grid.Column="2" Grid.Row="2" Grid.RowSpan="4" Margin="10" AutoGeneratingColumn="EvenementCreationAutomatiqueColonneDansDataGridInventaire" IsReadOnly="True">
 
             <DataGrid.ItemContainerStyle>
                 <Style TargetType="DataGridRow">
@@ -73,7 +84,7 @@
 
         </DataGrid>
 
-                <DockPanel Grid.Column="2" Grid.Row="5">
+                <DockPanel Grid.Column="2" Grid.Row="6">
             <Button Name="btnDeSelectionnerAlimentDatagrid" HorizontalAlignment="Center" Content="Déselectionner l'aliment" Background="#CC5F8C5A" BorderBrush="White" Foreground="White" BorderThickness="2,2,2,2" Padding="10,5" FontSize="20" Width="320"  FontWeight="Bold" FontFamily="Rockwell" Margin="20,0,10,0" Height="40" Click="ClickButtonDeSelectionnerAliment">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -93,8 +104,8 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>

@@ -22,11 +22,10 @@ namespace TP214E
     /// </summary>
     public partial class PageInventaire : Page
     {
-        private List<Aliment> aliments;
 
         private Aliment alimentSelectionne;
 
-        private DAL dal;
+        private readonly DAL dal;
 
         public PageInventaire()
         {
@@ -34,16 +33,20 @@ namespace TP214E
 
             InitializeComponent();
 
-            BtnAjouterModifier.Content = EtatButton.Ajouter.ToString();
-
-            BtnEffacerSupprimer.Content = EtatButton.Effacer.ToString();
-
-            DpDateExpiration.SelectedDate = DateTime.Today;
-
-            btnDeSelectionnerAlimentDatagrid.IsEnabled = false;
+            SetEtatInitialControlsPage();
 
             AjouterListeAlimentsDansDataGrid();
         }
+
+        private void SetEtatInitialControlsPage()
+        {
+            BtnAjouterModifier.Content = EtatButton.Ajouter.ToString();
+            BtnEffacerSupprimer.Content = EtatButton.Effacer.ToString();
+            btnDeSelectionnerAlimentDatagrid.IsEnabled = false;
+
+            DpDateExpiration.SelectedDate = DateTime.Today;
+        }
+
 
         public List<Aliment> ObtenirListeAliments()
         {
@@ -177,6 +180,11 @@ namespace TP214E
             alimentCreer.ExpireLe = DpDateExpiration.SelectedDate.Value;
 
             return alimentCreer;
+        }
+
+        private void ClickBoutonRetourVersAccueil(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new PageAccueil());
         }
     }
 }
