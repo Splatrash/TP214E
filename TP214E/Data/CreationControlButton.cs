@@ -9,7 +9,7 @@ namespace TP214E.Data
 {
     public static class CreationControlButton
     {
-
+        #region MÉTHODES
         public static Button TypeDeBoutonACreer(Object objetABouton)
         {
             Button btnCreer = new Button();
@@ -63,6 +63,7 @@ namespace TP214E.Data
 
             return btnCommande;
         }
+        #endregion
     }
 
 }

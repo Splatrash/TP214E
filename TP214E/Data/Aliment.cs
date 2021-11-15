@@ -7,24 +7,34 @@ namespace TP214E.Data
 {
     public interface IAliment
     {
+        #region PROPRIÉTÉS ET INDEXEURS
         ObjectId Id { get; set; }
         string Nom { get; set; }
         int Quantite { get; set; }
         string Unite { get; set; }
         DateTime ExpireLe { get; set; }
+
+        #endregion
     }
 
     public class Aliment : IAliment
     {
+        #region ATTRIBUTS
+
         private string _nom;
         private int _quantite;
         private string _unite;
         private DateTime _dateExpiration;
 
+        #endregion
+
         /*
         * Logiquement il devrait avoir des repas en plus des aliments, mais pour simplifier et
         * puisque je manque de temps, je considère le aliments comme étant les repas aussi.
         */
+
+        #region PROPRIÉTÉS ET INDEXEURS
+
         public ObjectId Id { get; set; }
         public string Nom
         {
@@ -62,8 +72,12 @@ namespace TP214E.Data
         public DateTime ExpireLe
         {
             get { return _dateExpiration; }
-            set {_dateExpiration = value; }
+            set { _dateExpiration = value; }
         }
+
+        #endregion
+
+        #region CONSTRUCTEURS
 
         public Aliment(string nom, int quantite, string unite, DateTime expireLe)
         {
@@ -73,7 +87,11 @@ namespace TP214E.Data
             ExpireLe = expireLe;
         }
 
-        public bool ChangerQuantiteAliment(int valeurChangement )
+        #endregion
+
+        #region MÉTHODES
+
+        public bool ChangerQuantiteAliment(int valeurChangement)
         {
             if (valeurChangement <= Quantite)
             {
@@ -84,9 +102,6 @@ namespace TP214E.Data
                 return false;
         }
 
-
-
-       
-
+        #endregion
     }
 }

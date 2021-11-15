@@ -16,6 +16,8 @@ namespace TP214E.Data
             mongoDBClient = OuvrirConnexion();
         }
 
+        #region MÉTHODES
+
         public List<Aliment> ChercherAlimentBaseDonnees()
         {
             var aliments = new List<Aliment>();
@@ -87,5 +89,6 @@ namespace TP214E.Data
             return dbClient;
         }
 
+        #endregion
     }
 }
