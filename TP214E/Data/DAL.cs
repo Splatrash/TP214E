@@ -62,7 +62,7 @@ namespace TP214E.Data
                 var conditions = Builders<Aliment>.Filter.Eq("_id", aliment.Id);
                 var modificationEffectuee = Builders<Aliment>.Update.Set("Nom", aliment.Nom)
                     .Set("Quantite", aliment.Quantite).Set("Unite", aliment.Unite).Set("ExpireLe", aliment.ExpireLe);
-                var requeteSupression = baseDonnees.GetCollection<Aliment>("Aliments").UpdateOne(conditions, modificationEffectuee);
+                baseDonnees.GetCollection<Aliment>("Aliments").UpdateOne(conditions, modificationEffectuee);
             }
             catch (Exception ex)
             {
@@ -76,7 +76,7 @@ namespace TP214E.Data
             {
                 IMongoDatabase baseDonnees = mongoDBClient.GetDatabase("TP2DB");
                 var conditions = Builders<Aliment>.Filter.Eq("_id", idAliment);
-                var requeteSupression = baseDonnees.GetCollection<Aliment>("Aliments").DeleteOne(conditions);
+                baseDonnees.GetCollection<Aliment>("Aliments").DeleteOne(conditions);
             }
             catch (Exception ex)
             {
