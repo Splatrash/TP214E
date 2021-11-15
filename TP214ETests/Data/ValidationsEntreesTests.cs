@@ -56,7 +56,7 @@ namespace TP214E.Data.Tests
         {
             string donneEnParametre = "ml";
 
-            bool validation = ValidationsEntrees.ValiderNumeriqueSansEspaceNonVide(donneEnParametre);
+            bool validation = ValidationsEntrees.ValiderAlphaNumeriqueSansEspaceNonVide(donneEnParametre);
 
             Assert.IsTrue(validation);
         }
@@ -66,7 +66,7 @@ namespace TP214E.Data.Tests
         {
             string donneEnParametre = "ml   !";
 
-            bool validation = ValidationsEntrees.ValiderNumeriqueSansEspaceNonVide(donneEnParametre);
+            bool validation = ValidationsEntrees.ValiderAlphaNumeriqueSansEspaceNonVide(donneEnParametre);
 
             Assert.IsFalse(validation);
         }
