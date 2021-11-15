@@ -42,8 +42,8 @@ namespace TP214E.Data
             get { return _quantite; }
             set
             {
-                if (value < 1)
-                    throw new ArgumentOutOfRangeException("Quantité", "La quantité doit être supérieure à 0");
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("Quantité", "La quantité doit être supérieure ou égale à 0");
                 else
                     _quantite = value;
             }
@@ -64,9 +64,7 @@ namespace TP214E.Data
             get { return _dateExpiration; }
             set
             {
-                if (value < DateTime.Today.AddDays(1))
-                    throw new ArgumentOutOfRangeException("Date d'expiration", "La date d'expiration doit être plus tard qu'aujourd'hui");
-                else
+                
                     _dateExpiration = value;
             }
         }
