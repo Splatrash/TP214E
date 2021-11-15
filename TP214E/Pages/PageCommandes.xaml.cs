@@ -127,18 +127,26 @@ namespace TP214E.Pages
         {
             List<ObjetCommande> objetsCommande = new List<ObjetCommande>();
 
-            foreach (ObjetCommande objetCommande in DgCommande.Items)
+            try
             {
-                string messageAlimentmanquant = objetCommande.VerifierEtMettreAJourQuantiteAliments(inventaireAliments);
-                if (messageAlimentmanquant != "")
+                foreach (ObjetCommande objetCommande in DgCommande.Items)
                 {
-                    MessageBox.Show(messageAlimentmanquant);
-                    return null;
+                    string messageAlimentmanquant = objetCommande.VerifierEtMettreAJourQuantiteAliments(inventaireAliments);
+                    if (messageAlimentmanquant != "")
+                    {
+                        MessageBox.Show(messageAlimentmanquant);
+                        return null;
+                    }
+                    objetsCommande.Add(objetCommande);
                 }
-                objetsCommande.Add(objetCommande);
-            }
 
-            return objetsCommande;
+                return objetsCommande;
+            }
+            catch (KeyNotFoundException exception)
+            {
+                MessageBox.Show("Une erreur s'est produite : " + exception.Message, "Ajout d'un boutton");
+                throw;
+            }
         }
 
         private void MettreAJourBaseDonnee(List<Aliment> inventaireAliments)
