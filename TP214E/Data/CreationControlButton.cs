@@ -21,8 +21,7 @@ namespace TP214E.Data
                 return CreationButtonsListeCommandes(btnCreer, (Commande) objetAButton);
 
             else
-                throw new ArgumentNullException("Création d'un Boutton",
-                    "Le type de button a créer n'existe pas ou n'est pas pris en charge.");
+                throw new InvalidOperationException("Le type de button a créer n'existe pas ou n'est pas pris en charge.");
             
         }
 

@@ -46,5 +46,11 @@ namespace TP214E.Data.Tests
 
             Assert.AreEqual(aliment, boutonCree.Tag);
         }
+
+        [TestMethod]
+        public void TypeDeBoutonACreer_Lance_InvalidOperationException_Si_L_Objet_En_Parametre_N_Est_Pas_Valide()
+        {
+            Assert.ThrowsException<InvalidOperationException>(() => CreationControlButton.TypeDeButtonACreer(null));
+        }
     }
 }
