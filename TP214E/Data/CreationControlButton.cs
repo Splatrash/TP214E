@@ -21,12 +21,11 @@ namespace TP214E.Data
                 return CreationButtonsListeCommandes(btnCreer, (Commande) objetAButton);
 
             else
-                throw new ArgumentNullException("Création d'un Boutton",
-                    "Le type de button a créer n'existe pas ou n'est pas pris en charge.");
+                throw new InvalidOperationException("Le type de button a créer n'existe pas ou n'est pas pris en charge.");
             
         }
 
-        private static Button CreationButtonsListeAliments(Button btnAliment, Aliment aliment)
+        public static Button CreationButtonsListeAliments(Button btnAliment, Aliment aliment)
         {
 
             var hexColor = new BrushConverter();
@@ -46,7 +45,7 @@ namespace TP214E.Data
             return btnAliment;
         }
 
-        private static Button CreationButtonsListeCommandes(Button btnCommande,Commande commande)
+        public static Button CreationButtonsListeCommandes(Button btnCommande,Commande commande)
         {
             var hexColor = new BrushConverter();
 

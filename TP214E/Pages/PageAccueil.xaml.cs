@@ -20,8 +20,8 @@ namespace TP214E
     /// </summary>
     public partial class PageAccueil : Page
     {
-        
-        
+
+
         public PageAccueil()
         {
 

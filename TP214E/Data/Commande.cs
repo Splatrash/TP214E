@@ -2,10 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
 
 namespace TP214E.Data
 {
-    public class Commande
+    public interface ICommande
+    {
+        int NumeroCommande { get; set; }
+        List<ObjetCommande> ObjetsCommande { get; set; }
+        DateTime CreerLe { get; set; }
+        int ObtenirNumeroCommande();
+    }
+
+    public class Commande : ICommande
     {
         //Si dans le futur on a besoin de mettre dans une base de données
         //public ObjectId Id { get; set; }

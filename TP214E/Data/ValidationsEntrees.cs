@@ -26,7 +26,7 @@ namespace TP214E.Data
 
         public static bool ValiderAlphaNumeriqueSansEspaceNonVide(string entreeAVerifier)
         {
-            if (Regex.IsMatch(entreeAVerifier, "^[a-zA-Z0-9]*$") && VerifierSiContientEspacesEtNonVide(entreeAVerifier))
+            if (Regex.IsMatch(entreeAVerifier, "^[a-zA-Z0-9]*$") && ValidationsEntrees.VerifierSiContientEspacesEtNonVide(entreeAVerifier))
                 return true;
             
             return false;
