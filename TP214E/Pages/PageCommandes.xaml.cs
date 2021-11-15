@@ -50,7 +50,7 @@ namespace TP214E.Pages
             {
                 try
                 {
-                    Button btnAliment = CreationControlButton.TypeDeButtonACreer(aliment);
+                    Button btnAliment = CreationControlButton.TypeDeBoutonACreer(aliment);
                     btnAliment.Click += new System.Windows.RoutedEventHandler(ClickAlimentDansListeAliments);
                     WrpPanelAliments.Children.Add(btnAliment);
                 }
