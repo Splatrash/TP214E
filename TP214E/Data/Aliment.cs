@@ -42,7 +42,7 @@ namespace TP214E.Data
             get { return _quantite; }
             set
             {
-                if (value < 1)
+                if (value < 0)
                     throw new ArgumentOutOfRangeException("Quantité", "La quantité doit être supérieure à 0");
                 else
                     _quantite = value;
@@ -62,13 +62,7 @@ namespace TP214E.Data
         public DateTime ExpireLe
         {
             get { return _dateExpiration; }
-            set
-            {
-                if (value < DateTime.Today.AddDays(1))
-                    throw new ArgumentOutOfRangeException("Date d'expiration", "La date d'expiration doit être plus tard qu'aujourd'hui");
-                else
-                    _dateExpiration = value;
-            }
+            set {_dateExpiration = value; }
         }
 
         public Aliment(string nom, int quantite, string unite, DateTime expireLe)

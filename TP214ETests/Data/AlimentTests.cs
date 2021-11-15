@@ -16,21 +16,15 @@ namespace TP214E.Data.Tests
         }
 
         [TestMethod()]
-        public void Aliment_Envoi_ArgumentOutOfRangeException_Si_L_Quantite_Est_PLus_Petite_Que_1()
+        public void Aliment_Envoi_ArgumentOutOfRangeException_Si_L_Quantite_Est_PLus_Petite_Que_0()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Aliment("Ketchup", 0, "ml", DateTime.Now.AddDays(5)));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Aliment("Ketchup", -1, "ml", DateTime.Now.AddDays(5)));
         }
 
         [TestMethod()]
         public void Aliment_Envoi_ArgumentOutOfRangeException_S_Le_Unite_Est_Vide()
         {
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Aliment("Ketchup", 1, "", DateTime.Now.AddDays(5)));
-        }
-
-        [TestMethod()]
-        public void Aliment_Envoi_ArgumentOutOfRangeException_Si_La_Date_D_Expiration_Est_Aujourdhui_Ou_Avant()
-        {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Aliment("Ketchup", 1, "ml", DateTime.Now));
         }
 
         [TestMethod()]
