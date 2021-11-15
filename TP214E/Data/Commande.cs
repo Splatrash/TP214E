@@ -33,7 +33,6 @@ namespace TP214E.Data
         {
             int numeroCommande;
 
-            //Rappel personnel: Le ? permet de faire le if lorsque on est pas garantie qu'il ne soit pas null
             if (Commandes.ListeCommandes.Any())
                 numeroCommande = Commandes.ListeCommandes[Commandes.ListeCommandes.Count - 1].NumeroCommande + 1;
             else

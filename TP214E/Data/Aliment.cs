@@ -67,7 +67,6 @@ namespace TP214E.Data
 
         public Aliment(string nom, int quantite, string unite, DateTime expireLe)
         {
-           
             Nom = nom;
             Quantite = quantite;
             Unite = unite;

@@ -60,7 +60,6 @@ namespace TP214E
         private void EvenementCreationAutomatiqueColonneDansDataGridInventaire(object sender, DataGridAutoGeneratingColumnEventArgs colonneEnCreation)
         {
            FormatageColonneDataGridLorsCreation(colonneEnCreation);
-           
         }
 
         private void FormatageColonneDataGridLorsCreation(DataGridAutoGeneratingColumnEventArgs colonneEnCreation)
@@ -82,7 +81,6 @@ namespace TP214E
             BtnEffacerSupprimer.Content = nameof(EtatButton.Supprimer);
 
             RemplissageFormulaireSurAliment();
-
         }
 
         private void RemplissageFormulaireSurAliment()
@@ -115,6 +113,7 @@ namespace TP214E
                 case nameof(EtatButton.Effacer):
                     EffacerChampsCreationEtModificationAliment();
                     break;
+
                 case nameof(EtatButton.Supprimer):
                     dal.SupprimerAlimentDansBaseDonnees(alimentSelectionne.Id);
                     AjouterListeAlimentsDansDataGrid();
@@ -126,9 +125,11 @@ namespace TP214E
         private void EffacerChampsCreationEtModificationAliment()
         {
             alimentSelectionne = null;
+
             TxtNom.Clear();
             TxtQuantite.Clear();
             TxtUnite.Clear();
+
             DpDateExpiration.SelectedDate = DateTime.Today;
         }
         private void ValidationDesCharactereEcrits(object sender, TextCompositionEventArgs caractereVerifie)
@@ -140,11 +141,12 @@ namespace TP214E
             //Pt checker pour empecher les espaces
             if(((TextBox)sender).Name == TxtNom.Name)
                 caractereVerifie.Handled = !charactereAlphaNumericRegex.IsMatch(caractereVerifie.Text);
+
             else if (((TextBox)sender).Name == TxtQuantite.Name)
                 caractereVerifie.Handled = !charactereNumericRegex.IsMatch(caractereVerifie.Text);
+
             else if (((TextBox)sender).Name == TxtUnite.Name)
                 caractereVerifie.Handled = !charactereAlphaNumericRegex.IsMatch(caractereVerifie.Text);
-
         }
 
         private void ClickBoutonAjoutOuModifierAliment(object sender, RoutedEventArgs e)
@@ -159,6 +161,7 @@ namespace TP214E
                         DeselectionnerAlimentDansDataGrid();
                     }
                     break;
+
                 case nameof(EtatButton.Modifier):
                     if (ValidationAliment())
                     {
@@ -168,12 +171,12 @@ namespace TP214E
                     }
                     break;
             }
-            
         }
 
         private bool ValidationAliment()
         {
             string contenuMessageBoxErreur = "";
+
             if (!ValidationsEntrees.ValiderAlphaNumeriqueAvecEspaceNonVide(TxtNom.Text))
                 contenuMessageBoxErreur += "- Le nom doit seulement contenir des caractères alphanumérique et ne pas être vide.\n";
             if (!ValidationsEntrees.ValiderAlphaNumeriqueSansEspaceNonVide(TxtUnite.Text))
@@ -186,8 +189,7 @@ namespace TP214E
                 MessageBox.Show("L'ajout n'a pas pu se faire, veillez suivre ces conseils: \n \n" + contenuMessageBoxErreur, "Vérifier les données", MessageBoxButton.OK);
                 return false;
             }
-            else
-                return true;
+            return true;
         }
 
         private Aliment CreerAlimentApresModification()
@@ -200,7 +202,6 @@ namespace TP214E
 
         private Aliment CreerAlimentSansId()
         {
-            
             Aliment alimentCreer = new Aliment(TxtNom.Text.Trim(), Int32.Parse(TxtQuantite.Text.Trim()), TxtUnite.Text.Trim(), DpDateExpiration.SelectedDate.Value);
 
             return alimentCreer;

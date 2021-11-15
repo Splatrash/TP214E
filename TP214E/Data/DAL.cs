@@ -27,7 +27,6 @@ namespace TP214E.Data
             catch (Exception ex)
             {
                 MessageBox.Show("Impossible de se connecter à la base de données " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
             return aliments;
         }
@@ -39,10 +38,9 @@ namespace TP214E.Data
                 IMongoDatabase baseDonnees = mongoDBClient.GetDatabase("TP2DB");
                 baseDonnees.GetCollection<Aliment>("Aliments").InsertOne(alimentAjoute);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e);
-                throw;
+                MessageBox.Show("Impossible de se connecter à la base de données " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         public void ModifierAlimentDansBaseDonnees(Aliment aliment)
@@ -55,10 +53,9 @@ namespace TP214E.Data
                     .Set("Quantite", aliment.Quantite).Set("Unite", aliment.Unite).Set("ExpireLe", aliment.ExpireLe);
                 var requeteSupression = baseDonnees.GetCollection<Aliment>("Aliments").UpdateOne(conditions, modificationEffectuee);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e);
-                throw;
+                MessageBox.Show("Impossible de se connecter à la base de données " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -70,10 +67,9 @@ namespace TP214E.Data
                 var conditions = Builders<Aliment>.Filter.Eq("_id", idAliment);
                 var requeteSupression = baseDonnees.GetCollection<Aliment>("Aliments").DeleteOne(conditions);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e);
-                throw;
+                MessageBox.Show("Impossible de se connecter à la base de données " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

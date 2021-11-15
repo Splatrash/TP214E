@@ -9,6 +9,7 @@
       Title="Accueil">
 
     <Grid ShowGridLines="False" Background="Black">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="*"/>
@@ -19,6 +20,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
+
         <Image Grid.Row="0" Grid.Column="0" Source="/Ressources/Images/victorLogo1.png"/>
         <Label Grid.Row="0" Grid.Column="1" Content="Gestion de FoodTruck Chez Victor" Foreground="#FF5F8C5A" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Rockwell" FontSize="36" FontWeight="Normal"/>
         
@@ -43,11 +45,11 @@
                         <Setter Property="CornerRadius" Value="5"/>
                     </Style>
                 </Button.Resources>
-
             </Button>
         </StackPanel>
         
         <Label Grid.Row="2" Grid.Column="1" Content="Conception et &#10;qualité logicielle" Foreground="#FFF" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Rockwell" FontSize="12" FontWeight="Bold" Margin="0,0,10,0"/>
         <Label Grid.Row="2" Grid.Column="2" Content="TP2" Foreground="#FFF" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Rockwell" FontSize="12" FontWeight="Bold"/>
+
     </Grid>
 </Page>

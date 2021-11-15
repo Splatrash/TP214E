@@ -22,7 +22,6 @@ namespace TP214E.Data
 
             else
                 throw new InvalidOperationException("Le type de button a créer n'existe pas ou n'est pas pris en charge.");
-            
         }
 
         public static Button CreationBoutonsListeAliments(Button btnAliment, Aliment aliment)

@@ -39,7 +39,6 @@
             </DataGrid.Columns>
         </DataGrid>
 
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
             <ColumnDefinition Name="GridColonne2" Width="*"/>
@@ -55,11 +54,5 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
-
-
-
-
     </Grid>
-
-
 </Page>
