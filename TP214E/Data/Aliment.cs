@@ -7,6 +7,10 @@ namespace TP214E.Data
 {
     public class Aliment
     {
+        /*
+        * Logiquement il devrait avoir des repas en plus des aliments, mais pour simplifier et
+        * puisque je manque de temps, je considère le aliments comme étant les repas aussi.
+        */
         public ObjectId Id { get; set; }
         public string Nom { get; set; }
         public int Quantite { get; set; }
@@ -20,6 +24,17 @@ namespace TP214E.Data
             Quantite = quantite;
             Unite = unite;
             ExpireLe = expireLe;
+        }
+
+        public bool ChangerQuantiteAliment(int valeurChangement )
+        {
+            if (valeurChangement <= Quantite)
+            {
+                Quantite -= valeurChangement;
+                return true;
+            }
+            else
+                return false;
         }
 
     }

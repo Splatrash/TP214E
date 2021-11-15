@@ -15,6 +15,8 @@ using TP214E.Data;
 
 namespace TP214E.Pages
 {
+   
+
     /// <summary>
     /// Logique d'interaction pour PageCommandes.xaml
     /// </summary>
@@ -99,18 +101,46 @@ namespace TP214E.Pages
 
         private void ClickBoutonCreerCommande(object sender, RoutedEventArgs e)
         {
+            CreerUneCommande();
+        }
+
+        private void CreerUneCommande()
+        {
             List<ObjetCommande> objetsCommande = new List<ObjetCommande>();
 
+            List<Aliment> inventaireAliments = dal.ChercherAlimentBaseDonnees();
+
             foreach (ObjetCommande objetCommande in DgCommande.Items)
+            {
+                foreach (Aliment aliment in inventaireAliments)
+                {
+                    if (objetCommande.NomAliment == aliment.Nom)
+                    {
+                        if (!aliment.ChangerQuantiteAliment(objetCommande.QuantiteAliment))
+                        {
+                            MessageBox.Show(String.Format(
+                                "Il manque d'aliment pour la commande:\n -La commande exige {0} {1}\n -Il reste {2} {3}",
+                                objetCommande.QuantiteAliment, objetCommande.NomAliment, aliment.Quantite,
+                                aliment.Nom));
+                            return;
+                        }
+                        
+                        break;
+                    }
+                }
                 objetsCommande.Add(objetCommande);
+            }
+
+            foreach (Aliment aliment in inventaireAliments)
+                dal.ModifierAlimentDansBaseDonnees(aliment);
             
             Commande commandeCreer = new Commande(objetsCommande, DateTime.Today);
 
             Commandes.ListeCommandes.Add(commandeCreer);
 
-            BtnHistoriqueCommande.IsEnabled = true;
-
             EffacerCommande();
+
+            BtnHistoriqueCommande.IsEnabled = true;
         }
 
     

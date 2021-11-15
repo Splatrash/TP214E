@@ -17,7 +17,11 @@ namespace TP214E.Data
 
         public void ChangerQuantite(int quantiteAjoutee)
         {
-            QuantiteAliment += quantiteAjoutee;
+            if (quantiteAjoutee > 0)
+                QuantiteAliment += quantiteAjoutee;
+            else
+                throw new ArgumentOutOfRangeException("Changement de la quantitée",
+                    "La quantité n'était pas un nombre positif plus grand que 0");
         }
     }
 }
