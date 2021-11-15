@@ -62,16 +62,11 @@ namespace TP214E.Data
         public DateTime ExpireLe
         {
             get { return _dateExpiration; }
-            set
-            {
-                
-                    _dateExpiration = value;
-            }
+            set {_dateExpiration = value; }
         }
 
         public Aliment(string nom, int quantite, string unite, DateTime expireLe)
         {
-           
             Nom = nom;
             Quantite = quantite;
             Unite = unite;

@@ -15,8 +15,6 @@ using TP214E.Data;
 
 namespace TP214E.Pages
 {
-   
-
     /// <summary>
     /// Logique d'interaction pour PageCommandes.xaml
     /// </summary>
@@ -30,9 +28,7 @@ namespace TP214E.Pages
             dal = new DAL();
 
             InitializeComponent();
-
             CreerListeAliments();
-
             SetEtatInitialControlsPage();
         }
 
@@ -64,7 +60,6 @@ namespace TP214E.Pages
 
         private void ClickAlimentDansListeAliments(object sender, EventArgs e)
         {
-
             Aliment alimentAjoute = (Aliment)(sender as Button).Tag;
 
             if (DgCommande.Items.Count == 0)
@@ -79,7 +74,6 @@ namespace TP214E.Pages
                     return;
                 }
             }
-
             ObjetCommande objetAjouterCommande = new ObjetCommande(alimentAjoute.Nom, 1);
             DgCommande.Items.Add(objetAjouterCommande);
         }
@@ -87,6 +81,7 @@ namespace TP214E.Pages
         private void EvenementLigneDataGridSelectionneeDoubleClickee(object sender, MouseButtonEventArgs e)
         {
             DgCommande.Items.Remove(DgCommande.SelectedItem);
+
             if (DgCommande.Items.Count == 0)
                 ChangerEtatBoutonCreerEtEffacer();
 
@@ -106,7 +101,6 @@ namespace TP214E.Pages
 
         private void CreerUneCommande()
         {
-            
             List<Aliment> inventaireAliments = dal.ChercherAlimentBaseDonnees();
 
             List<ObjetCommande> objetsCommande = AjouterObjetCommandeAListeDesObjetsCommande(inventaireAliments);
@@ -127,18 +121,25 @@ namespace TP214E.Pages
         {
             List<ObjetCommande> objetsCommande = new List<ObjetCommande>();
 
-            foreach (ObjetCommande objetCommande in DgCommande.Items)
+            try
             {
-                string messageAlimentmanquant = objetCommande.VerifierEtMettreAJourQuantiteAliments(inventaireAliments);
-                if (messageAlimentmanquant != "")
+                foreach (ObjetCommande objetCommande in DgCommande.Items)
                 {
-                    MessageBox.Show(messageAlimentmanquant);
-                    return null;
+                    string messageAlimentmanquant = objetCommande.VerifierEtMettreAJourQuantiteAliments(inventaireAliments);
+                    if (messageAlimentmanquant != "")
+                    {
+                        MessageBox.Show(messageAlimentmanquant);
+                        return null;
+                    }
+                    objetsCommande.Add(objetCommande);
                 }
-                objetsCommande.Add(objetCommande);
+                return objetsCommande;
             }
-
-            return objetsCommande;
+            catch (KeyNotFoundException exception)
+            {
+                MessageBox.Show("Une erreur s'est produite : " + exception.Message, "Ajout d'un boutton");
+                throw;
+            }
         }
 
         private void MettreAJourBaseDonnee(List<Aliment> inventaireAliments)

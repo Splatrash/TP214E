@@ -95,7 +95,6 @@
 
         </DockPanel>
 
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>
             <ColumnDefinition Width="*"/>
@@ -113,10 +112,5 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
-
-
-
     </Grid>
-
-
 </Page>

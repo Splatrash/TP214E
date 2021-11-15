@@ -8,7 +8,6 @@ namespace TP214E.Data
     {
         string NomAliment { get; set; }
         int QuantiteAliment { get; set; }
-        
     }
 
     public class ObjetCommande : IObjetCommande
