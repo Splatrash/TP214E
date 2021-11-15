@@ -33,7 +33,7 @@ namespace TP214E.Pages
             {
                 try
                 {
-                    Button btnCommande = CreationControlButton.TypeDeButtonACreer(commande);
+                    Button btnCommande = CreationControlButton.TypeDeBoutonACreer(commande);
                     btnCommande.Click += new System.Windows.RoutedEventHandler(ClickCommandeDansListeCommandes);
                     WrpPanelCommandes.Children.Add(btnCommande);
                 }
