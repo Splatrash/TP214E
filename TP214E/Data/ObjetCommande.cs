@@ -30,5 +30,25 @@ namespace TP214E.Data
                 throw new ArgumentOutOfRangeException("Changement de la quantitée",
                     "La quantité n'était pas un nombre positif plus grand que 0");
         }
+
+        public string VerifierEtMettreAJourQuantiteAliments(List<Aliment> inventaireAliments)
+        {
+            foreach (Aliment aliment in inventaireAliments)
+            {
+                if (NomAliment == aliment.Nom)
+                {
+                    if (!aliment.ChangerQuantiteAliment(QuantiteAliment))
+                    {
+                        string messageAlimentManquant = String.Format(
+                            "Il manque d'aliment pour la commande:\n -La commande exige {0} {1}\n -Il reste {2} {3}",
+                            QuantiteAliment, NomAliment, aliment.Quantite,
+                            aliment.Nom);
+                        return messageAlimentManquant;
+                    }
+                    return "";
+                }
+            }
+            throw new KeyNotFoundException("L'aliment dans la commande n'éxiste pas.");
+        }
     }
 }

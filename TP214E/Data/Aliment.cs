@@ -28,12 +28,13 @@ namespace TP214E.Data
 
         public Aliment(string nom, int quantite, string unite, DateTime expireLe)
         {
-           
             Nom = nom;
             Quantite = quantite;
             Unite = unite;
             ExpireLe = expireLe;
         }
+
+
 
         public bool ChangerQuantiteAliment(int valeurChangement )
         {
@@ -45,6 +46,10 @@ namespace TP214E.Data
             else
                 return false;
         }
+
+
+
+       
 
     }
 }

@@ -106,44 +106,46 @@ namespace TP214E.Pages
 
         private void CreerUneCommande()
         {
-            List<ObjetCommande> objetsCommande = new List<ObjetCommande>();
-
+            
             List<Aliment> inventaireAliments = dal.ChercherAlimentBaseDonnees();
+
+            List<ObjetCommande> objetsCommande = AjouterObjetCommandeAListeDesObjetsCommande(inventaireAliments);
+
+            if (objetsCommande != null)
+            {
+                MettreAJourBaseDonnee(inventaireAliments);
+
+                Commande commandeCreer = new Commande(objetsCommande, DateTime.Today);
+                Commandes.ListeCommandes.Add(commandeCreer);
+
+                EffacerCommande();
+                BtnHistoriqueCommande.IsEnabled = true;
+            }
+        }
+
+        private List<ObjetCommande> AjouterObjetCommandeAListeDesObjetsCommande(List<Aliment> inventaireAliments)
+        {
+            List<ObjetCommande> objetsCommande = new List<ObjetCommande>();
 
             foreach (ObjetCommande objetCommande in DgCommande.Items)
             {
-                foreach (Aliment aliment in inventaireAliments)
+                string messageAlimentmanquant = objetCommande.VerifierEtMettreAJourQuantiteAliments(inventaireAliments);
+                if (messageAlimentmanquant != "")
                 {
-                    if (objetCommande.NomAliment == aliment.Nom)
-                    {
-                        if (!aliment.ChangerQuantiteAliment(objetCommande.QuantiteAliment))
-                        {
-                            MessageBox.Show(String.Format(
-                                "Il manque d'aliment pour la commande:\n -La commande exige {0} {1}\n -Il reste {2} {3}",
-                                objetCommande.QuantiteAliment, objetCommande.NomAliment, aliment.Quantite,
-                                aliment.Nom));
-                            return;
-                        }
-                        
-                        break;
-                    }
+                    MessageBox.Show(messageAlimentmanquant);
+                    return null;
                 }
                 objetsCommande.Add(objetCommande);
             }
 
-            foreach (Aliment aliment in inventaireAliments)
-                dal.ModifierAlimentDansBaseDonnees(aliment);
-            
-            Commande commandeCreer = new Commande( objetsCommande, DateTime.Today);
-
-            Commandes.ListeCommandes.Add(commandeCreer);
-
-            EffacerCommande();
-
-            BtnHistoriqueCommande.IsEnabled = true;
+            return objetsCommande;
         }
 
-    
+        private void MettreAJourBaseDonnee(List<Aliment> inventaireAliments)
+        {
+            foreach (Aliment aliment in inventaireAliments)
+                dal.ModifierAlimentDansBaseDonnees(aliment);
+        }
 
         private void ClickButtonEffacerCommande(object sender, RoutedEventArgs e)
         {
