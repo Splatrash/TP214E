@@ -55,7 +55,7 @@ namespace TP214E.Data
             set
             {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException("Quantité", "La quantité doit être supérieure à 0");
+                    throw new ArgumentOutOfRangeException("Quantité", "La quantité doit être supérieure ou égale à 0");
                 else
                     _quantite = value;
             }
