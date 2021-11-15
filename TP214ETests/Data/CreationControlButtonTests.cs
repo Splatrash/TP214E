@@ -25,7 +25,7 @@ namespace TP214E.Data.Tests
 
             Button btnCreer = new Button();
 
-            btnCreer = CreationControlButton.CreationButtonsListeAliments(btnCreer, aliment);
+            btnCreer = CreationControlButton.CreationBoutonsListeAliments(btnCreer, aliment);
 
             Assert.AreEqual(aliment.Nom, btnCreer.Content);
 
@@ -41,7 +41,7 @@ namespace TP214E.Data.Tests
             aliment.Setup(u => u.Unite).Returns("ml");
             aliment.Setup(d => d.ExpireLe).Returns(DateTime.Today);
 
-            Button boutonCree = CreationControlButton.TypeDeButtonACreer(aliment);
+            Button boutonCree = CreationControlButton.TypeDeBoutonACreer(aliment);
             Button boutonCible = new Button();
 
             Assert.AreEqual(aliment, boutonCree.Tag);
@@ -50,7 +50,7 @@ namespace TP214E.Data.Tests
         [TestMethod]
         public void TypeDeBoutonACreer_Lance_InvalidOperationException_Si_L_Objet_En_Parametre_N_Est_Pas_Valide()
         {
-            Assert.ThrowsException<InvalidOperationException>(() => CreationControlButton.TypeDeButtonACreer(null));
+            Assert.ThrowsException<InvalidOperationException>(() => CreationControlButton.TypeDeBoutonACreer(null));
         }
     }
 }

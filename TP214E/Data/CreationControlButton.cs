@@ -10,22 +10,22 @@ namespace TP214E.Data
     public static class CreationControlButton
     {
 
-        public static Button TypeDeButtonACreer(Object objetAButton)
+        public static Button TypeDeBoutonACreer(Object objetABouton)
         {
             Button btnCreer = new Button();
 
-            if (objetAButton is Aliment)
-                return CreationButtonsListeAliments(btnCreer, (Aliment)objetAButton);
+            if (objetABouton is Aliment)
+                return CreationBoutonsListeAliments(btnCreer, (Aliment)objetABouton);
 
-            else if(objetAButton is Commande)
-                return CreationButtonsListeCommandes(btnCreer, (Commande) objetAButton);
+            else if(objetABouton is Commande)
+                return CreationBoutonsListeCommandes(btnCreer, (Commande) objetABouton);
 
             else
                 throw new InvalidOperationException("Le type de button a créer n'existe pas ou n'est pas pris en charge.");
             
         }
 
-        public static Button CreationButtonsListeAliments(Button btnAliment, Aliment aliment)
+        public static Button CreationBoutonsListeAliments(Button btnAliment, Aliment aliment)
         {
 
             var hexColor = new BrushConverter();
@@ -45,7 +45,7 @@ namespace TP214E.Data
             return btnAliment;
         }
 
-        public static Button CreationButtonsListeCommandes(Button btnCommande,Commande commande)
+        public static Button CreationBoutonsListeCommandes(Button btnCommande,Commande commande)
         {
             var hexColor = new BrushConverter();
 
