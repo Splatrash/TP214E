@@ -10,11 +10,20 @@ namespace TP214E.Data
 {
     public class DAL : IDAL
     {
+        #region ATTRIBUTS
+
         public MongoClient mongoDBClient;
+
+        #endregion
+
+        #region CONSTRUCTEURS
+
         public DAL()
         {
             mongoDBClient = OuvrirConnexion();
         }
+
+        #endregion
 
         #region MÉTHODES
 

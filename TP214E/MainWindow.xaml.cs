@@ -21,10 +21,13 @@ namespace TP214E
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region CONSTRUCTEURS
         public MainWindow()
         {
             InitializeComponent();
             _NavigationFrame.Navigate(new PageAccueil());
         }
+
+        #endregion
     }
 }

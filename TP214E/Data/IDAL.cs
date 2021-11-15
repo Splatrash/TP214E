@@ -14,9 +14,12 @@ namespace TP214E.Data
 {
     public interface IDAL
     {
+        #region MÉTHODES
         List<Aliment> ChercherAlimentBaseDonnees();
         void AjouterAlimentDansBaseDonnees(Aliment alimentAjoute);
         void ModifierAlimentDansBaseDonnees(Aliment aliment);
         void SupprimerAlimentDansBaseDonnees(ObjectId idAliment);
+
+        #endregion
     }
 }

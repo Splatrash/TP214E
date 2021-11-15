@@ -8,11 +8,12 @@ namespace TP214E.Data
 {
     public static class ValidationsEntrees
     {
+        #region MÉTHODES
         public static bool ValiderAlphaNumeriqueAvecEspaceNonVide(string entreeAVerifier)
         {
             if (Regex.IsMatch(entreeAVerifier, "^[a-zA-Z0-9]*$") && entreeAVerifier.Trim() != "")
                 return true;
-           
+
             return false;
         }
 
@@ -20,7 +21,7 @@ namespace TP214E.Data
         {
             if (int.TryParse(entreeAVerifier, out _))
                 return true;
-            
+
             return false;
         }
 
@@ -28,7 +29,7 @@ namespace TP214E.Data
         {
             if (Regex.IsMatch(entreeAVerifier, "^[a-zA-Z0-9]*$") && ValidationsEntrees.VerifierSiContientEspacesEtNonVide(entreeAVerifier))
                 return true;
-            
+
             return false;
         }
 
@@ -39,5 +40,7 @@ namespace TP214E.Data
 
             return false;
         }
+
+        #endregion
     }
 }

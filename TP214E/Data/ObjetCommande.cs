@@ -6,20 +6,32 @@ namespace TP214E.Data
 {
     public interface IObjetCommande
     {
+        #region PROPRIÉTÉS ET INDEXEURS
+
         string NomAliment { get; set; }
         int QuantiteAliment { get; set; }
+
+        #endregion
     }
 
     public class ObjetCommande : IObjetCommande
     {
+        #region PROPRIÉTÉS ET INDEXEURS
         public string NomAliment { get; set; }
         public int QuantiteAliment { get; set; }
 
+        #endregion
+
+        #region CONSTRUCTEURS
         public ObjetCommande(string nomAliment, int quantiteAliment)
         {
             NomAliment = nomAliment;
             QuantiteAliment = quantiteAliment;
         }
+
+        #endregion
+
+        #region MÉTHODES
 
         public void ChangerQuantite(int quantiteAjoutee)
         {
@@ -49,5 +61,7 @@ namespace TP214E.Data
             }
             throw new KeyNotFoundException("L'aliment dans la commande n'éxiste pas.");
         }
+
+        #endregion
     }
 }

@@ -21,12 +21,15 @@ namespace TP214E
     public partial class PageAccueil : Page
     {
 
-
+        #region CONSTRUCTEURS
         public PageAccueil()
         {
             InitializeComponent();
         }
 
+        #endregion
+
+        #region FORM EVENTS
         private void BoutonInventaire_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new PageInventaire());
@@ -35,5 +38,8 @@ namespace TP214E
         {
             NavigationService.Navigate(new PageCommandes());
         }
+
+        #endregion
+
     }
 }

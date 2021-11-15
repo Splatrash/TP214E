@@ -31,6 +31,8 @@ namespace TP214E.Data
         /*
         * Logiquement il devrait avoir des repas en plus des aliments, mais pour simplifier et
         * puisque je manque de temps, je considère le aliments comme étant les repas aussi.
+        *
+        * Il manque aussi le système de gestion des aliments périmés.
         */
 
         #region PROPRIÉTÉS ET INDEXEURS

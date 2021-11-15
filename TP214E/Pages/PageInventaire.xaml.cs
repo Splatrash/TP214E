@@ -23,30 +23,35 @@ namespace TP214E
     public partial class PageInventaire : Page
     {
 
+        #region ATTRIBUTS
+
         private Aliment alimentSelectionne;
 
         private readonly DAL dal;
+
+        #endregion
+
+        #region CONSTRUCTEURS
 
         public PageInventaire()
         {
             dal = new DAL();
 
             InitializeComponent();
-
             SetEtatInitialControlsPage();
-
             AjouterListeAlimentsDansDataGrid();
         }
 
+        #endregion
+
+        #region MÉTHODES
         private void SetEtatInitialControlsPage()
         {
             BtnAjouterModifier.Content = EtatButton.Ajouter.ToString();
             BtnEffacerSupprimer.Content = EtatButton.Effacer.ToString();
-            
+
             DpDateExpiration.SelectedDate = DateTime.Today;
         }
-
-
         public List<Aliment> ObtenirListeAliments()
         {
             return dal.ChercherAlimentBaseDonnees();
@@ -56,12 +61,6 @@ namespace TP214E
         {
             DgInventaire.ItemsSource = ObtenirListeAliments();
         }
-
-        private void EvenementCreationAutomatiqueColonneDansDataGridInventaire(object sender, DataGridAutoGeneratingColumnEventArgs colonneEnCreation)
-        {
-           FormatageColonneDataGridLorsCreation(colonneEnCreation);
-        }
-
         private void FormatageColonneDataGridLorsCreation(DataGridAutoGeneratingColumnEventArgs colonneEnCreation)
         {
             string titreDeLaColonneEnCreation = colonneEnCreation.Column.Header.ToString();
@@ -69,33 +68,6 @@ namespace TP214E
             if (titreDeLaColonneEnCreation == "Id")
                 colonneEnCreation.Column.Visibility = Visibility.Collapsed;
         }
-
-
-        private void EvenementLigneDataGridSelectionneeDoubleClickee(object sender, MouseButtonEventArgs e)
-        {
-            alimentSelectionne = (Aliment)DgInventaire.SelectedItem;
-
-            btnDeSelectionnerAlimentDatagrid.IsEnabled = true;
-
-            BtnAjouterModifier.Content = nameof(EtatButton.Modifier);
-            BtnEffacerSupprimer.Content = nameof(EtatButton.Supprimer);
-
-            RemplissageFormulaireSurAliment();
-        }
-
-        private void RemplissageFormulaireSurAliment()
-        {
-            TxtNom.Text = alimentSelectionne.Nom;
-            TxtQuantite.Text = alimentSelectionne.Quantite.ToString();
-            TxtUnite.Text = alimentSelectionne.Unite;
-            DpDateExpiration.SelectedDate = alimentSelectionne.ExpireLe;
-        }
-
-        private void ClickButtonDeSelectionnerAliment(object sender, RoutedEventArgs e)
-        {
-           DeselectionnerAlimentDansDataGrid();
-        }
-
         private void DeselectionnerAlimentDansDataGrid()
         {
             DgInventaire.UnselectAll();
@@ -104,22 +76,6 @@ namespace TP214E
             btnDeSelectionnerAlimentDatagrid.IsEnabled = false;
 
             EffacerChampsCreationEtModificationAliment();
-        }
-
-        private void ClickButtonEffacerOuSupprimerAliment(object sender, RoutedEventArgs e)
-        {
-            switch (BtnEffacerSupprimer.Content)
-            {
-                case nameof(EtatButton.Effacer):
-                    EffacerChampsCreationEtModificationAliment();
-                    break;
-
-                case nameof(EtatButton.Supprimer):
-                    dal.SupprimerAlimentDansBaseDonnees(alimentSelectionne.Id);
-                    AjouterListeAlimentsDansDataGrid();
-                    DeselectionnerAlimentDansDataGrid();
-                    break;
-            }
         }
 
         private void EffacerChampsCreationEtModificationAliment()
@@ -131,46 +87,6 @@ namespace TP214E
             TxtUnite.Clear();
 
             DpDateExpiration.SelectedDate = DateTime.Today;
-        }
-        private void ValidationDesCharactereEcrits(object sender, TextCompositionEventArgs caractereVerifie)
-        {
-            Regex charactereNumericRegex = new Regex("[0-9]+");
-            Regex charactereAlphaNumericRegex = new Regex("[a-zA-Z0-9]+");
-
-            //Comprendre pourquoi le switch ne marche pas...
-            //Pt checker pour empecher les espaces
-            if(((TextBox)sender).Name == TxtNom.Name)
-                caractereVerifie.Handled = !charactereAlphaNumericRegex.IsMatch(caractereVerifie.Text);
-
-            else if (((TextBox)sender).Name == TxtQuantite.Name)
-                caractereVerifie.Handled = !charactereNumericRegex.IsMatch(caractereVerifie.Text);
-
-            else if (((TextBox)sender).Name == TxtUnite.Name)
-                caractereVerifie.Handled = !charactereAlphaNumericRegex.IsMatch(caractereVerifie.Text);
-        }
-
-        private void ClickBoutonAjoutOuModifierAliment(object sender, RoutedEventArgs e)
-        {
-            switch (BtnAjouterModifier.Content)
-            {
-                case nameof(EtatButton.Ajouter):
-                    if (ValidationAliment())
-                    {
-                        dal.AjouterAlimentDansBaseDonnees(CreerAlimentSansId());
-                        AjouterListeAlimentsDansDataGrid();
-                        DeselectionnerAlimentDansDataGrid();
-                    }
-                    break;
-
-                case nameof(EtatButton.Modifier):
-                    if (ValidationAliment())
-                    {
-                        dal.ModifierAlimentDansBaseDonnees(CreerAlimentApresModification());
-                        AjouterListeAlimentsDansDataGrid();
-                        DeselectionnerAlimentDansDataGrid();
-                    }
-                    break;
-            }
         }
 
         private bool ValidationAliment()
@@ -206,10 +122,100 @@ namespace TP214E
 
             return alimentCreer;
         }
+        private void RemplissageFormulaireSurAliment()
+        {
+            TxtNom.Text = alimentSelectionne.Nom;
+            TxtQuantite.Text = alimentSelectionne.Quantite.ToString();
+            TxtUnite.Text = alimentSelectionne.Unite;
+            DpDateExpiration.SelectedDate = alimentSelectionne.ExpireLe;
+        }
 
+        #endregion
+
+        #region FORM EVENTS
+
+        private void EvenementCreationAutomatiqueColonneDansDataGridInventaire(object sender, DataGridAutoGeneratingColumnEventArgs colonneEnCreation)
+        {
+            FormatageColonneDataGridLorsCreation(colonneEnCreation);
+        }
+
+        private void EvenementLigneDataGridSelectionneeDoubleClickee(object sender, MouseButtonEventArgs e)
+        {
+            alimentSelectionne = (Aliment)DgInventaire.SelectedItem;
+
+            btnDeSelectionnerAlimentDatagrid.IsEnabled = true;
+
+            BtnAjouterModifier.Content = nameof(EtatButton.Modifier);
+            BtnEffacerSupprimer.Content = nameof(EtatButton.Supprimer);
+
+            RemplissageFormulaireSurAliment();
+        }
+        
+        private void ClickButtonDeSelectionnerAliment(object sender, RoutedEventArgs e)
+        {
+            DeselectionnerAlimentDansDataGrid();
+        }
+
+        private void ClickButtonEffacerOuSupprimerAliment(object sender, RoutedEventArgs e)
+        {
+            switch (BtnEffacerSupprimer.Content)
+            {
+                case nameof(EtatButton.Effacer):
+                    EffacerChampsCreationEtModificationAliment();
+                    break;
+
+                case nameof(EtatButton.Supprimer):
+                    dal.SupprimerAlimentDansBaseDonnees(alimentSelectionne.Id);
+                    AjouterListeAlimentsDansDataGrid();
+                    DeselectionnerAlimentDansDataGrid();
+                    break;
+            }
+        }
+        private void ValidationDesCharactereEcrits(object sender, TextCompositionEventArgs caractereVerifie)
+        {
+            Regex charactereNumericRegex = new Regex("[0-9]+");
+            Regex charactereAlphaNumericRegex = new Regex("[a-zA-Z0-9]+");
+
+            //Comprendre pourquoi le switch ne marche pas...
+            //Pt checker pour empecher les espaces
+            if (((TextBox)sender).Name == TxtNom.Name)
+                caractereVerifie.Handled = !charactereAlphaNumericRegex.IsMatch(caractereVerifie.Text);
+
+            else if (((TextBox)sender).Name == TxtQuantite.Name)
+                caractereVerifie.Handled = !charactereNumericRegex.IsMatch(caractereVerifie.Text);
+
+            else if (((TextBox)sender).Name == TxtUnite.Name)
+                caractereVerifie.Handled = !charactereAlphaNumericRegex.IsMatch(caractereVerifie.Text);
+        }
+
+        private void ClickBoutonAjoutOuModifierAliment(object sender, RoutedEventArgs e)
+        {
+            switch (BtnAjouterModifier.Content)
+            {
+                case nameof(EtatButton.Ajouter):
+                    if (ValidationAliment())
+                    {
+                        dal.AjouterAlimentDansBaseDonnees(CreerAlimentSansId());
+                        AjouterListeAlimentsDansDataGrid();
+                        DeselectionnerAlimentDansDataGrid();
+                    }
+                    break;
+
+                case nameof(EtatButton.Modifier):
+                    if (ValidationAliment())
+                    {
+                        dal.ModifierAlimentDansBaseDonnees(CreerAlimentApresModification());
+                        AjouterListeAlimentsDansDataGrid();
+                        DeselectionnerAlimentDansDataGrid();
+                    }
+                    break;
+            }
+        }
         private void ClickBoutonRetourVersAccueil(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new PageAccueil());
         }
+
+        #endregion
     }
 }

@@ -18,12 +18,17 @@ namespace TP214E.Pages
     /// </summary>
     public partial class PageHistoriqueCommandes : Page
     {
+        #region CONSTRUCTEURS
+
         public PageHistoriqueCommandes()
         {
             InitializeComponent();
-
             CreerListeCommandes();
         }
+
+        #endregion
+
+        #region MÉTHODES
 
         private void CreerListeCommandes()
         {
@@ -44,7 +49,9 @@ namespace TP214E.Pages
                 }
             }
         }
+        #endregion
 
+        #region MÉTHODES
         private void ClickCommandeDansListeCommandes(object sender, RoutedEventArgs e)
         {
             DgCommande.Items.Clear();
@@ -61,5 +68,7 @@ namespace TP214E.Pages
         {
             NavigationService.Navigate(new PageCommandes());
         }
+
+        #endregion
     }
 }
